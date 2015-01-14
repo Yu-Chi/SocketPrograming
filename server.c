@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
      listen(sockfd,5);
      clilen = sizeof(cli_addr);
      
-     //while(1){
+     
      //Step4:Accept a connection with the accept() system call. 
      //This call typically blocks until a client connects with the server.
      newsockfd = accept(sockfd, 
@@ -57,21 +57,11 @@ int main(int argc, char *argv[])
      
      //Step5 : Send and receive data
      n = read(newsockfd,buffer,255);
-     if (n < 0){
-     	error("ERROR reading from socket");
-     } else if(strcmp(buffer,"Exit")){
-     		close(newsockfd);
-     		close(sockfd);
-     }else{
-
-		    
-
-     }
-
-      	printf("Here is the message: %s\n",buffer);
-		     n = write(newsockfd,"I got your message",18);
-		     if (n < 0) error("ERROR writing to socket");
-    // }
-     
+     if (n < 0) error("ERROR reading from socket");
+     printf("Here is the message: %s\n",buffer);
+     n = write(newsockfd,"I got your message",18);
+     if (n < 0) error("ERROR writing to socket");
+     close(newsockfd);
+     close(sockfd);
      return 0; 
 }
